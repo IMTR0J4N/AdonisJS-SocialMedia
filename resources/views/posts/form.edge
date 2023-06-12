@@ -1,0 +1,52 @@
+<form method="POST" enctype="multipart/form-data">
+    <div class="row mb-3">
+
+        <div class="col">
+            @!component('components/input', {
+                label: 'Titre',
+                name: 'title',
+                value: post.title
+            })
+        </div>
+
+        <div class="col">
+            @!component('components/input', {
+                label: 'Catégorie',
+                name: 'categoryId',
+                value: post.categoryId,
+                options: categories.reduce((acc, c) => ({...acc, [c.id]: c.name}), {})
+            })
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <div class="d-flex">
+            @if(post.thumbnail)
+                <div class="me-3">
+                    <img src="/uploads/{{ post.thumbnail }}" width="100" height="100" style="object-fit: cover" alt="post thumbnail" class="img-thumbnail">
+                </div>
+            @endif
+            @!component('components/input', {
+                label: 'Miniature',
+                name: 'thumbnailFile',
+                type: 'file'
+            })
+        </div>
+   </div>
+
+    <div class="mb-3">
+         @!component('components/input', {
+             label: 'Contenu',
+             name: 'content',
+             value: post.content,
+             type: 'textarea'
+         })
+    </div>
+
+    <div class="mb-3">
+     <input {{ post.online ? 'checked' : ''}} type="checkbox" name="online" class="form-check-input" id="online">
+     <label for="online" class="form-check-label">En ligne ?</label>
+    </div>
+
+     <button class="btn btn-primary">Sauvegarder</button>
+ </form>

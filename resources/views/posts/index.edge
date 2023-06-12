@@ -1,0 +1,42 @@
+@layout('layout')
+
+@section('body')
+
+    <h2>Posts</h2>
+
+    <section>
+        <p>
+            <a href="{{ route('posts.create') }}" class="btn btn-primary"> Créer un article</a>
+        </p>
+    </section>
+
+    <main>
+        <ul class="list-group mb-3">
+            @each(post in posts)
+                <li class="list-group-item">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a href="{{ route('posts.show', { id: post.id }) }}">
+                            {{ post.title }}
+                        </a>
+                        <form action="{{ route('posts.show', { id: post.id }) }}?_method=DELETE" method="POST">
+                            <button class="btn btn-danger">
+                                Supprimer
+                            </button>
+                        </form>
+                    </div>
+                </li>
+            @endeach
+        </ul>
+    </main>
+
+    <nav>
+        <ul class="pagination">
+            @each(anchor in posts.getUrlsForRange(1, posts.lastPage))
+                <li class="page-item">
+                    <a href="{{ anchor.url }}" class="page-link">{{ anchor.page }}</a>
+                </li>
+            @endeach
+        </ul>
+    </nav>
+
+@endsection

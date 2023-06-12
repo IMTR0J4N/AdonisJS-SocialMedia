@@ -1,0 +1,29 @@
+@layout('layout')
+
+@section('body')
+
+    <h1>Se connecter</h1>
+
+    <form action="" method="POST">
+        <div class="mb-3">
+            @!component('components/input', {
+                label: 'Email',
+                name: 'email',
+                type: 'email'
+            })
+        </div>
+        <div class="mb-3">
+            @!component('components/input', {
+                label: 'Mot de passe',
+                name: 'password',
+                type: 'password'
+            })
+        </div>
+
+        <button class="btn btn-primary">Se connecter</button>
+        <div class="position-absolute bottom-0 end-0">
+            <span><a class="link-opacity-50-hover" href="{{ route('register') }}">s'enregistrer</a></span>
+        </div>
+    </form>
+
+@endsection

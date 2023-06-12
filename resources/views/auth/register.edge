@@ -1,0 +1,42 @@
+@layout('layout')
+
+@section('body')
+
+    <h1>S'enregistrer</h1>
+
+    <form action="" method="POST">
+        <div class="mb-3">
+            @!component('components/input', {
+                label: 'Pseudo d\'Affichage',
+                name: 'displayName',
+                value: 'facultatif'
+            })
+        </div>
+        <div class="mb-3">
+            @!component('components/input', {
+                label: 'Nom d\'utilisateur',
+                name: 'username',
+            })
+        </div>
+        <div class="mb-3">
+            @!component('components/input', {
+                label: 'Email',
+                name: 'email',
+                type: 'email'
+            })
+        </div>
+        <div class="mb-3">
+            @!component('components/input', {
+                label: 'Mot de passe',
+                name: 'password',
+                type: 'password'
+            })
+        </div>
+
+        <button class="btn btn-primary">S'enregister</button>
+        <div class="position-absolute bottom-0 end-0">
+            <span><a class="link-opacity-50-hover" href="{{ route('login') }}">se connecter</a></span>
+        </div>
+    </form>
+
+@endsection
