@@ -6,7 +6,8 @@
 
     @include('posts/form')
 
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -15,16 +16,16 @@
                 </div>
                 <div class="modal-body">
                     @!component('components/input', {
-                        label: 'Nom',
-                        name: 'category'
+                    label: 'Nom',
+                    name: 'category'
                     })
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
-                    <a class="btn btn-primary" href="{{ route('posts.createCat', { id: post.id })}}">Créer</a>
+                    <a class="btn btn-primary" href="{{ route('posts.createCat', { post.id ? id: post.id : id :" new"
+                        })}}">Créer</a>
                 </div>
             </div>
         </div>
     </div>
-
 @endsection

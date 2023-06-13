@@ -26,14 +26,17 @@ export default class Post extends BaseModel {
   public user: BelongsTo<typeof User>
 
   @column()
-  public categoryId: number
+  public categoryId: number | null
 
   @column()
   public userId: number
 
+  @column()
+  public author: string
+
   @column.dateTime({ autoCreate: true })
-  public createdAt: DateTime | null
+  public createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
-  public updatedAt: DateTime | null
+  public updatedAt: DateTime
 }

@@ -25,7 +25,7 @@ Route.group(() => {
   Route.post('/post/new', 'PostsController.store')
   
   Route.get('/post/:id/update', 'PostsController.showAndUpdate').as('posts.update')
-  Route.get('post/:id/update/newCategory', 'PostsController.createCat').as('posts.createCat')
+  Route.get('post/newCategory/redirect/:id', 'PostsController.createCat').as('posts.createCat')
   Route.post('/post/:id/update', 'PostsController.update')
   Route.delete('/post/:id/update', 'PostsController.destroy')
 

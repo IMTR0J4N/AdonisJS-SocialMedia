@@ -7,9 +7,9 @@
                 <option value="{{ key }}" {{ flashMessages.get(name) || value == key ? 'selected' : '' }} >{{ options[key] }}</option>
             @endeach
                 <option value="Créer une catégorie" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                    {{--  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">  --}}
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         Créer une catégorie
-                    {{--  </button>  --}}
+                    </button>
                 </option>
         </select>
     @elseif(type === 'textarea')

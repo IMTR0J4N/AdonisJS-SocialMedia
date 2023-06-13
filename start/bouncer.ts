@@ -35,6 +35,10 @@ export const { actions } = Bouncer.define('editPost', (user: User, post: Post) =
   return post.userId === user.id
 })
 
+export const { actions } = Bouncer.define('createPost', (user: User, post: Post) => {
+  return post.author === user.username
+})
+
 /*
 |--------------------------------------------------------------------------
 | Bouncer Policies

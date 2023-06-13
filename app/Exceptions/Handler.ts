@@ -27,12 +27,4 @@ export default class ExceptionHandler extends HttpExceptionHandler {
   constructor() {
     super(Logger)
   }
-
-  public async handle(error: any, ctx: HttpContextContract) {
-    if(error.code === "E_ROW_NOT_FOUND") {
-      return ctx.response.redirect().toRoute('userNotFound')
-    }
-
-    return super.handle(error, ctx)
-  }
 }

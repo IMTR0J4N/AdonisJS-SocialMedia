@@ -4,6 +4,7 @@
 
     <div class="container d-flex flex-column justify-content-center align-items-center">
         <span class="text-opacity-50">Créé le {{ post.createdAt }}</span>
+        <span class="mb-3">Par : {{ post.author }}</span>
         <h2 class="">{{ post.title }}</h2>
 
             @if(post.thumbnail)

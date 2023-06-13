@@ -24,20 +24,32 @@ export default class SecurityController {
     return view.render('auth/register')
   }
 
-  public async doRegister({ request, response }: HttpContextContract) {
+  public async doRegister({ request, response, session }: HttpContextContract) {
     const newUser = new User
     const data = await request.validate(CreateUserValidator)
 
-    newUser
-      .merge({
-        displayName: data.displayName === 'facultatif' ? null : data.displayName,
-        username: data.username,
-        email: data.email,
-        password: data.password
-      })
-      .save()
+    if (await User.findBy('email', data.email)) {
 
-    response.redirect().toRoute('login')
+      session.flash({ error: 'Cet adresse E-Mail est déjà utilisée' })
+      response.redirect().toRoute('register')
+
+    } else if (await User.findBy('username', data.username)) {
+
+      session.flash({ error: 'Ce nom d\'utilisateur est déjà utilisé' })
+      response.redirect().toRoute('register')
+
+    } else {
+      
+      newUser
+        .merge({
+          displayName: data.displayName === 'facultatif' ? null : data.displayName,
+          username: data.username,
+          email: data.email,
+          password: data.password
+        })
+        .save()
+      response.redirect().toRoute('login')
+    }
   }
 
   public async disconnect({ auth, response }: HttpContextContract) {
