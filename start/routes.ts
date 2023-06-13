@@ -23,15 +23,22 @@ import Route from '@ioc:Adonis/Core/Route'
 Route.group(() => {
   Route.get('/post/new', 'PostsController.create').as('posts.create')
   Route.post('/post/new', 'PostsController.store')
-  Route.get('/post/:id', 'PostsController.show').as('posts.show')
-  Route.post('/post/:id', 'PostsController.update')
-  Route.delete('/post/:id', 'PostsController.destroy')
+  
+  Route.get('/post/:id/update', 'PostsController.showAndUpdate').as('posts.update')
+  Route.get('post/:id/update/newCategory', 'PostsController.createCat').as('posts.createCat')
+  Route.post('/post/:id/update', 'PostsController.update')
+  Route.delete('/post/:id/update', 'PostsController.destroy')
+
   Route.get('/contact', 'ContactController.contact').as('contact')
   Route.post('/contact', 'ContactController.store')
+  
 }).middleware('auth')
 
 Route.group(() => {
   Route.get('/', 'PostsController.index').as('home')
+
+  Route.get('/post/:id', 'PostsController.show').as('posts.show')
+
   Route.get('/profile/:username', 'ProfilesController.show')
   Route.get('/profile/userNotFound', 'ProfilesController.error').as('userNotFound')
 }).middleware('silentAuth')

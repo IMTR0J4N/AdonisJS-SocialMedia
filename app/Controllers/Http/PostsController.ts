@@ -1,4 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import { DateTime } from 'luxon'
 import Database from '@ioc:Adonis/Lucid/Database'
 import Category from 'App/Models/Category'
 import Post from 'App/Models/Post'
@@ -30,6 +31,22 @@ export default class PostsController {
     })
   }
 
+  public async createCat({ response, request, session, params }: HttpContextContract) {
+    const catName = request.input('category');
+
+    console.log(catName);
+    
+
+    const cat = new Category()
+
+    await cat.merge({
+      name: catName
+    }).save()
+
+    response.redirect().toRoute('posts.update', { id: params.id })
+    session.flash({ success: `La catégorie "${catName}" à été créé avec succès` })
+  }
+
   public async store({ params, request, session, response, auth }: HttpContextContract) {
     await this.handleRequest(params, request, auth)
 
@@ -38,13 +55,27 @@ export default class PostsController {
     return response.redirect().toRoute('home')
   }
 
-  public async show({ view, params, bouncer, auth }: HttpContextContract) {
+  public async show({ view, params, auth }: HttpContextContract) {
+    const post = await Post.findOrFail(params.id)
+    const userData = auth.user || null
+    const categories = await Category.all()
+
+    post.createdAt = DateTime.
+
+    return view.render('posts/show', {
+      post,
+      categories,
+      userData
+    })
+  }
+
+  public async showAndUpdate({ view, params, bouncer, auth }: HttpContextContract) {
     const post = await Post.findOrFail(params.id)
     const userData = auth.user || null
     await bouncer.authorize('editPost', post)
     const categories = await Category.all()
 
-    return view.render('posts/show', {
+    return view.render('posts/update', {
       post,
       categories,
       userData
@@ -79,7 +110,7 @@ export default class PostsController {
     const data = await request.validate(UpdatePostValidator)
     const thumbnail = request.file('thumbnailFile')
 
-    let authUserId;
+    let authUserId
 
     if (bouncer) {
       await bouncer.authorize('editPost', post)

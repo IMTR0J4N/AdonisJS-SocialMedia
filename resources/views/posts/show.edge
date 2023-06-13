@@ -2,8 +2,19 @@
 
 @section('body')
 
-    <h2>Modifier l'article {{ post.title }}</h2>
+    <div class="container d-flex flex-column justify-content-center align-items-center">
+        <span class="text-opacity-50">Créé le {{ post.createdAt }}</span>
+        <h2 class="">{{ post.title }}</h2>
 
-    @include('posts/form')
+            @if(post.thumbnail)
+                <div class="mt-4">
+                    <img src="/uploads/{{ post.thumbnail }}" width="500" height="500" style="object-fit: cover" alt="post thumbnail" class="img-thumbnail">
+                </div>
+            @endif
+
+        <div class="mt-4">
+            <p class="text-break">{{ post.content }}</p>
+        </div>
+    </div>
 
 @endsection

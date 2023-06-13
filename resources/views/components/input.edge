@@ -2,9 +2,15 @@
     <label for="{{ name }}">{{ label }}</label>
     @if(options)
         <select name="{{ name }}" id="{{ name }}" class="form-control {{ flashMessages.has(`errors.${name}`) ? 'is-invalid' : '' }}">
+                <option selected disabled>Selectionner une option</option>
             @each(key in Object.keys(options))
                 <option value="{{ key }}" {{ flashMessages.get(name) || value == key ? 'selected' : '' }} >{{ options[key] }}</option>
             @endeach
+                <option value="Créer une catégorie" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    {{--  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">  --}}
+                        Créer une catégorie
+                    {{--  </button>  --}}
+                </option>
         </select>
     @elseif(type === 'textarea')
 
