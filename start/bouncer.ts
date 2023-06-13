@@ -31,12 +31,9 @@ import User from 'App/Models/User'
 | NOTE: Always export the "actions" const from this file
 |****************************************************************
 */
-export const { actions } = Bouncer.define('editPost', (user: User, post: Post) => {
-  return post.userId === user.id
-})
-
-export const { actions } = Bouncer.define('createPost', (user: User, post: Post) => {
-  return post.author === user.username
+export const { actions } = Bouncer
+  .define('editPost', (user: User, post: Post) => {
+    return post.userId === user.id
 })
 
 /*

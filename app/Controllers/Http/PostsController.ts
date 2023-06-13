@@ -48,8 +48,8 @@ export default class PostsController {
   }
 
   public async store({ params, request, session, response, auth, bouncer }: HttpContextContract) {
-    
-    await this.handleRequest(params, request, auth, bouncer)
+
+    await this.handleRequest(params, request, auth)
 
     session.flash({ success: "L'article a bien été créé" })
 
